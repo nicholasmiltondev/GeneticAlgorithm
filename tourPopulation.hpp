@@ -1,0 +1,14 @@
+//
+// Created by nicho on 2018-11-14.
+//
+
+#ifndef GENETICALGORITHM_TOURPOPULATION_HPP
+#define GENETICALGORITHM_TOURPOPULATION_HPP
+
+
+class tourPopulation {
+
+};
+
+
+#endif //GENETICALGORITHM_TOURPOPULATION_HPP
