@@ -7,7 +7,7 @@
 #include <string>
 
 class city{
-private:
+protected:
     std::string cityName;
     int x;
     int y;

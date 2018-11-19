@@ -7,15 +7,19 @@
 
 #include "city.hpp"
 #include <vector>
+#include <iostream>
+#include <cmath>
 
 class tour {
-private:
+protected:
     std::vector<city> cityTour;
-    int fitnessRating;
+    double fitnessRating;
 public:
     tour();
-    void addCity(city c);
+    void addCity(city* c);
     int getFitnessRating();
+    void printCitiesInTour();
+    void calcFitness();
 };
 
 
