@@ -9,9 +9,11 @@
 #include <vector>
 #include <iostream>
 #include <cmath>
+#include <algorithm>
 
 class tour {
 protected:
+    std::string tourName;
     std::vector<city> cityTour;
     double fitnessRating;
 public:
@@ -19,7 +21,8 @@ public:
     void addCity(city* c);
     int getFitnessRating();
     void printCitiesInTour();
-    void calcFitness();
+    void determine_fitness();
+    void shuffle_cities();
 };
 
 

@@ -20,14 +20,20 @@ void tour::printCitiesInTour(){
     }
 };
 
-void tour::calcFitness() {
+void tour::determine_fitness() {
     std::vector<city>::iterator it = cityTour.begin();
     int previousX = 0;
     int previousY = 0;
     fitnessRating = 0;
     while(it != cityTour.end()) {
         fitnessRating += sqrt(pow((it->getX() - previousX), 2) + pow((it->getY() - previousY), 2));
+        previousX = it->getX();
+        previousY = it->getY();
         ++it;
     }
     std::cout << "Fitness rating is: " << fitnessRating << std::endl;
+};
+
+void tour::shuffle_cities(){
+    std::random_shuffle (cityTour.begin(), cityTour.end());
 };
