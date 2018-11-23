@@ -20,10 +20,14 @@ void tour::printCitiesInTour(){
     }
 };
 
-void tour::determine_fitness() {
-    std::vector<city>::iterator it = cityTour.begin();
-    int previousX = 0;
-    int previousY = 0;
+std::string tour::getTourName() {
+    return tourName;
+}
+
+int tour::determine_fitness(){
+    auto it = cityTour.begin();
+    int previousX = (cityTour.end()-1)->getX();
+    int previousY = (cityTour.end()-1)->getY();
     fitnessRating = 0;
     while(it != cityTour.end()) {
         fitnessRating += sqrt(pow((it->getX() - previousX), 2) + pow((it->getY() - previousY), 2));
@@ -31,7 +35,8 @@ void tour::determine_fitness() {
         previousY = it->getY();
         ++it;
     }
-    std::cout << "Fitness rating is: " << fitnessRating << std::endl;
+    fitnessRating = 1000000/fitnessRating;
+    return fitnessRating;
 };
 
 void tour::shuffle_cities(){

@@ -20,8 +20,9 @@ public:
     tour();
     void addCity(city* c);
     int getFitnessRating();
+    std::string getTourName();
     void printCitiesInTour();
-    void determine_fitness();
+    int determine_fitness();
     void shuffle_cities();
 };
 

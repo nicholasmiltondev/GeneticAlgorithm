@@ -9,8 +9,11 @@
 #include <set>
 
 class tourPopulation {
+protected:
+//    std::set<tour> tp;
 public:
-    std::set<tour> tp;
+    void addTour(tour* t);
+    void printToursInPop();
 };
 
 

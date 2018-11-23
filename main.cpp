@@ -1,6 +1,7 @@
 #include <iostream>
 #include "city.hpp"
 #include "tour.hpp"
+#include "tourPopulation.hpp"
 #define CITIES_IN_TOUR 32
 #define POPULATION_SIZE 32
 #define SHUFFLES 64
@@ -14,21 +15,28 @@
 int main() {
     static long randomCityName = 0;
     static long randomTourName = 0;
-    tour* t = new tour();
+    int bestFitness = 0;
 
-    for(int i = 0; i < CITIES_IN_TOUR; i++){
-        int newX = rand() % MAP_BOUNDARY;
-        int newY = rand() % MAP_BOUNDARY;
-        ++randomCityName;
-        std::string newCityName ("City#" + std::to_string(randomCityName));
-        city* newCity = new city(newCityName, newX, newY);
-        t->addCity(newCity);
-    }
-    t->printCitiesInTour();
-    t->determine_fitness();
-    t->shuffle_cities();
-    t->printCitiesInTour();
-    t->determine_fitness();
+
+tour* t = new tour();
+
+        for (int i = 0; i < CITIES_IN_TOUR; i++) {
+            int newX = rand() % MAP_BOUNDARY;
+            int newY = rand() % MAP_BOUNDARY;
+            ++randomCityName;
+            std::string newCityName("City#" + std::to_string(randomCityName));
+            city *newCity = new city(newCityName, newX, newY);
+            t->addCity(newCity);
+        }
+
+        for(int j = 0; j < SHUFFLES; j++) {
+            int df = t->determine_fitness();
+            if(df > bestFitness) {
+                bestFitness = df;
+                std::cout << bestFitness << std::endl;
+            }
+            t->shuffle_cities();
+        }
 
     return 0;
 }
