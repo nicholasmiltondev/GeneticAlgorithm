@@ -12,11 +12,11 @@
 #define NUMBER_OF_PARENTS 2
 #define NUMBER_OF_ELITES 1
 
+
 int main() {
+    double bestFitness = 0;
     static long randomCityName = 0;
     static long randomTourName = 0;
-    double bestFitness = 0;
-
 
     tourPopulation* tp = new tourPopulation();
     for(int j = 0; j < POPULATION_SIZE; j++) {
@@ -44,6 +44,10 @@ int main() {
     tp->findCopyElite();
     std::cout << "Elite tour name is ..." << tp->nextGeneration[0].getTourName() << ", fitness is " << tp->nextGeneration[0].determine_fitness() << std::endl;
     tp->crossover();
+    ++randomTourName;
+    std::string newChildTourName("Tour#" + std::to_string(randomTourName));
+    tp->nextGeneration[1].setTourName(newChildTourName);
+    std::cout << "1st child tour name is " << tp->getChild(1).getTourName() << ", distance is " << tp->nextGeneration[1].determine_distance() << std::endl;
 
     return 0;
 }
