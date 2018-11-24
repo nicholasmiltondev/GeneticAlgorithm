@@ -20,8 +20,8 @@ void tourPopulation::findCopyElite() {
             eliteIndex = i;
         }
     }
-    population[eliteIndex].getTourName();
-    //this->addChild(&nextGeneration[eliteIndex]);
+    //std::cout << population[eliteIndex].getTourName();
+    this->addChild(&population[eliteIndex]);
 }
 
 void tourPopulation::select_parents(int poolSize) { // Takes PARENT_POOL_SIZE
@@ -47,13 +47,14 @@ void tourPopulation::crossover() {
             parent2 = i;
         }
     }
+    std::cout << "Chosen parents are " << parent1 << " and " << parent2 << std::endl;
     tour* child = new tour(); // Create a blank child tour.
     int r = rand()%(potentialParents[parent1].cityTour.size() - 1); // Random index to choose 2 parents.
     for(int i = 0; i < r; i++)
-        child->cityTour[i] = potentialParents[parent1].cityTour[i]; // Copy cities from parent 1 up to index r.
-    for(int i = r; i < 32; i++)
-        child[i].cityTour[i] = potentialParents[parent2].cityTour[i]; // Copy cities from parent 2 up to index end.
-    this->addChild(child);
+        child->addCity(potentialParents[parent1].getCityFromTour(i)); // Copy cities from parent 1 up to index r.
+//    for(int i = r; i < potentialParents[parent2].cityTour.size(); i++)
+//        child[i].cityTour[i] = potentialParents[parent2].cityTour[i]; // Copy cities from parent 2 up to index end.
+//    this->addChild(child);
 }
 
 //

@@ -42,8 +42,8 @@ int main() {
 
     tp->select_parents(PARENT_POOL_SIZE);
     tp->findCopyElite();
-    //tp->crossover();
-    //std::cout << "Tour name is ..." << tp->nextGeneration[0].getTourName();
+    std::cout << "Elite tour name is ..." << tp->nextGeneration[0].getTourName() << ", fitness is " << tp->nextGeneration[0].determine_fitness() << std::endl;
+    tp->crossover();
 
     return 0;
 }

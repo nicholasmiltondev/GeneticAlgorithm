@@ -9,6 +9,9 @@ tour::tour(){
 void tour::addCity(city* c){
     cityTour.push_back(*c);
 };
+city* tour::getCityFromTour(int x){
+    return &cityTour[x];
+};
 double tour::getFitnessRating(){
     return fitnessRating;
 };
