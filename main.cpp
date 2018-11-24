@@ -34,10 +34,16 @@ int main() {
         t->shuffle_cities(SHUFFLES);
         std::cout << t->determine_distance() << std::endl;
         std::cout << t->determine_fitness() << std::endl;
+        ++randomTourName;
+        std::string newTourName("Tour#" + std::to_string(randomTourName));
+        t->setTourName(newTourName);
         tp->addTour(t);
     }
 
-    std::cout << tp->crossover(5)->determine_fitness();
+    tp->select_parents(PARENT_POOL_SIZE);
+    tp->findCopyElite();
+    //tp->crossover();
+    //std::cout << "Tour name is ..." << tp->nextGeneration[0].getTourName();
 
     return 0;
 }

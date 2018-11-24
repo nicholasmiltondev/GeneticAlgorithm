@@ -12,9 +12,13 @@ class tourPopulation {
 public:
     std::vector<tour> population;
     std::vector<tour> potentialParents;
+    std::vector<tour> nextGeneration;
+    void crossover();
     double bestFitness;
     void addTour(tour* t);
+    void addChild(tour* t);
     void select_parents(int size);
+    void findCopyElite();
     void repopulate();
     tour getTour(int i);
 };

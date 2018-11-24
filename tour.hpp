@@ -21,6 +21,7 @@ public:
     tour();
     void addCity(city* c);
     std::string getTourName();
+    void setTourName(std::string s);
     void printCitiesInTour();
     double determine_fitness();
     double determine_distance();

@@ -12,6 +12,9 @@ void tour::addCity(city* c){
 double tour::getFitnessRating(){
     return fitnessRating;
 };
+void tour::setTourName(std::string s) {
+    this->tourName = s;
+}
 void tour::printCitiesInTour(){
     std::vector<city>::iterator it = cityTour.begin();
     while(it != cityTour.end()) {
