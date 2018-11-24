@@ -10,10 +10,12 @@
 
 class tourPopulation {
 protected:
-//    std::set<tour> tp;
+    std::vector<tour> population;
+    std::vector<tour> potentialParents;
+    double bestFitness;
 public:
     void addTour(tour* t);
-    void printToursInPop();
+    void crossover(int size);
 };
 
 

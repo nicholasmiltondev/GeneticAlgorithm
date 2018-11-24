@@ -3,13 +3,11 @@
 //
 
 #include "tourPopulation.hpp"
-
-//void tourPopulation::addTour(tour* t) {
-////    tp.insert(*t);
-////};
-//void tourPopulation::printToursInPop(){
-////    for(tour anytour: tp){
-////        std::cout << anytour.getTourName() << std::endl;
-////        anytour.determine_fitness();
-////    }
-//};
+void tourPopulation::addTour(tour* t){
+    population.push_back(*t);
+};
+void tourPopulation::crossover(int size) {
+    for(int i = 0; i < size; i++)
+        potentialParents.push_back(population[rand()%population.size()]);
+    
+}

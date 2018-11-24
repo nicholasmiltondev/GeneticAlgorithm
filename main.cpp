@@ -15,28 +15,29 @@
 int main() {
     static long randomCityName = 0;
     static long randomTourName = 0;
-    int bestFitness = 0;
+    double bestFitness = 0;
 
 
-tour* t = new tour();
+    tour *t = new tour();
 
-        for (int i = 0; i < CITIES_IN_TOUR; i++) {
-            int newX = rand() % MAP_BOUNDARY;
-            int newY = rand() % MAP_BOUNDARY;
-            ++randomCityName;
-            std::string newCityName("City#" + std::to_string(randomCityName));
-            city *newCity = new city(newCityName, newX, newY);
-            t->addCity(newCity);
+    for (int i = 0; i < CITIES_IN_TOUR; i++) {
+        int newX = rand() % MAP_BOUNDARY;
+        int newY = rand() % MAP_BOUNDARY;
+        ++randomCityName;
+        std::string newCityName("City#" + std::to_string(randomCityName));
+        city *newCity = new city(newCityName, newX, newY);
+        t->addCity(newCity);
+    }
+
+    t->shuffle_cities(SHUFFLES);
+
+    for(int k = 0; k < ITERATIONS; k++) {
+        double df = t->determine_fitness();
+        t->mutate();
+        if (df > bestFitness) {
+            bestFitness = df;
+            std::cout << bestFitness << std::endl;
         }
-
-        for(int j = 0; j < SHUFFLES; j++) {
-            int df = t->determine_fitness();
-            if(df > bestFitness) {
-                bestFitness = df;
-                std::cout << bestFitness << std::endl;
-            }
-            t->shuffle_cities();
-        }
-
+    }
     return 0;
 }
