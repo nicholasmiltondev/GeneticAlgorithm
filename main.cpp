@@ -18,26 +18,22 @@ int main() {
     double bestFitness = 0;
 
 
-    tour *t = new tour();
+    tourPopulation* tp = new tourPopulation();
+    for(int j = 0; j < POPULATION_SIZE; j++) {
+        tour *t = new tour();
 
-    for (int i = 0; i < CITIES_IN_TOUR; i++) {
-        int newX = rand() % MAP_BOUNDARY;
-        int newY = rand() % MAP_BOUNDARY;
-        ++randomCityName;
-        std::string newCityName("City#" + std::to_string(randomCityName));
-        city *newCity = new city(newCityName, newX, newY);
-        t->addCity(newCity);
-    }
-
-    t->shuffle_cities(SHUFFLES);
-
-    for(int k = 0; k < ITERATIONS; k++) {
-        double df = t->determine_fitness();
-        t->mutate();
-        if (df > bestFitness) {
-            bestFitness = df;
-            std::cout << bestFitness << std::endl;
+        for (int i = 0; i < CITIES_IN_TOUR; i++) {
+            int newX = rand() % MAP_BOUNDARY;
+            int newY = rand() % MAP_BOUNDARY;
+            ++randomCityName;
+            std::string newCityName("City#" + std::to_string(randomCityName));
+            city *newCity = new city(newCityName, newX, newY);
+            t->addCity(newCity);
         }
+
+        t->shuffle_cities(SHUFFLES);
+
+        tp->addTour(t);
     }
     return 0;
 }

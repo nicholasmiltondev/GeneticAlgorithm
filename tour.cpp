@@ -9,7 +9,7 @@ tour::tour(){
 void tour::addCity(city* c){
     cityTour.push_back(*c);
 };
-int tour::getFitnessRating(){
+double tour::getFitnessRating(){
     return fitnessRating;
 };
 void tour::printCitiesInTour(){

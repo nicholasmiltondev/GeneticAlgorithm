@@ -15,7 +15,8 @@ protected:
     double bestFitness;
 public:
     void addTour(tour* t);
-    void crossover(int size);
+    tour* crossover(int size);
+    void repopulate();
 };
 
 

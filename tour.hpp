@@ -14,16 +14,17 @@
 class tour {
 protected:
     std::string tourName;
-    std::vector<city> cityTour;
     double fitnessRating;
     double distance;
 public:
+    std::vector<city> cityTour;
     tour();
     void addCity(city* c);
     std::string getTourName();
     void printCitiesInTour();
     double determine_fitness();
     double determine_distance();
+    double getFitnessRating();
     void mutate();
     void shuffle_cities(int x);
 };
