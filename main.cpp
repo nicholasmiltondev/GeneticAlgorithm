@@ -32,8 +32,12 @@ int main() {
         }
 
         t->shuffle_cities(SHUFFLES);
-
+        std::cout << t->determine_distance() << std::endl;
+        std::cout << t->determine_fitness() << std::endl;
         tp->addTour(t);
     }
+
+    std::cout << tp->crossover(5)->determine_fitness();
+
     return 0;
 }

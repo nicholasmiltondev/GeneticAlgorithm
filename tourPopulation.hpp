@@ -9,14 +9,14 @@
 #include <set>
 
 class tourPopulation {
-protected:
+public:
     std::vector<tour> population;
     std::vector<tour> potentialParents;
     double bestFitness;
-public:
     void addTour(tour* t);
-    tour* crossover(int size);
+    void select_parents(int size);
     void repopulate();
+    tour getTour(int i);
 };
 
 
