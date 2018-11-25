@@ -20,7 +20,6 @@ public:
     tour getChild(int i);
     void select_parents(int size);
     void findCopyElite();
-    void repopulate();
     tour getTour(int i);
 };
 

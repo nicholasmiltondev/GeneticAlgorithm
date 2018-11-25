@@ -29,6 +29,7 @@ public:
     double determine_distance();
     double getFitnessRating();
     void mutate();
+    int getMutateValue();
     void shuffle_cities(int x);
     bool contains_city(std::string s);
 };
