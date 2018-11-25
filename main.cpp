@@ -20,6 +20,7 @@ int main() {
 
     tourPopulation* tp = new tourPopulation();
     for(int j = 0; j < POPULATION_SIZE; j++) {
+        
         tour *t = new tour();
 
         for (int i = 0; i < CITIES_IN_TOUR; i++) {
@@ -40,14 +41,28 @@ int main() {
         tp->addTour(t);
     }
 
-    tp->select_parents(PARENT_POOL_SIZE);
-    tp->findCopyElite();
-    std::cout << "Elite tour name is ..." << tp->nextGeneration[0].getTourName() << ", fitness is " << tp->nextGeneration[0].determine_fitness() << std::endl;
-    tp->crossover();
-    ++randomTourName;
-    std::string newChildTourName("Tour#" + std::to_string(randomTourName));
-    tp->nextGeneration[1].setTourName(newChildTourName);
-    std::cout << "1st child tour name is " << tp->getChild(1).getTourName() << ", distance is " << tp->nextGeneration[1].determine_distance() << std::endl;
+    for(int m = 0; m < ITERATIONS; m++) { // Number of iterations the genetic algorithm will go for.
+        tp->select_parents(PARENT_POOL_SIZE);
+        tp->findCopyElite();
+        std::cout << "Elite tour name is ..." << tp->nextGeneration[0].getTourName() << ", distance is "
+            << tp->nextGeneration[0].determine_distance()
+            << ", fitness is " << tp->nextGeneration[0].determine_fitness() << std::endl;
 
+        for (int k = 1; k < tp->population.size(); k++) {
+            tp->crossover();
+            ++randomTourName;
+            std::string newChildTourName("Tour#" + std::to_string(randomTourName));
+            tp->nextGeneration[k].determine_distance();
+            tp->nextGeneration[k].setTourName(newChildTourName);
+            tp->nextGeneration[k].determine_fitness();
+            std::cout << k << " position child tour name is " << tp->getChild(k).getTourName() << ", distance is "
+                      << tp->nextGeneration[k].determine_distance()
+                      << ", fitness is " << tp->nextGeneration[k].determine_fitness() << std::endl;
+        }
+        tp->population.clear();
+        tp->population = tp->nextGeneration;
+        tp->nextGeneration.clear();
+        tp->potentialParents.clear();
+    }
     return 0;
 }

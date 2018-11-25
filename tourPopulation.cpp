@@ -3,6 +3,7 @@
 //
 
 #include "tourPopulation.hpp"
+
 void tourPopulation::addTour(tour* t){ // Adds tour to population.
     population.push_back(*t);
 };
@@ -12,7 +13,9 @@ void tourPopulation::addChild(tour* t){ // Adds tour to nextGeneration.
 tour tourPopulation::getTour(int i) { // returns a tour at index position.
     return population.at(i);
 }
-
+tour tourPopulation::getChild(int i) { // returns a tour at index position.
+    return nextGeneration.at(i);
+}
 void tourPopulation::findCopyElite() {
     int eliteIndex = 0;
     for (int i = 1; i < population.size(); i++) { // Iterate through population to find the elite tour.
@@ -25,10 +28,11 @@ void tourPopulation::findCopyElite() {
 }
 
 void tourPopulation::select_parents(int poolSize) { // Takes PARENT_POOL_SIZE
-    // Block
-    for (int i = 0; i < poolSize; i++)
-        potentialParents.push_back(
-                population[rand() % population.size()]); // Add random parents to a potentialParent vector.
+    for (int i = 0; i < poolSize; i++) {
+        int rIndex = rand() % population.size();
+        std::cout << "Selecting parent at index " << rIndex << std::endl;
+        potentialParents.push_back(population[rIndex]); // Add random parents to a potentialParent vector.
+    }
 }
 
 void tourPopulation::crossover() {
@@ -48,37 +52,12 @@ void tourPopulation::crossover() {
         }
     }
     std::cout << "Chosen parents are " << parent1 << " and " << parent2 << std::endl;
+
     tour* child = new tour(); // Create a blank child tour.
     int r = rand()%(potentialParents[parent1].cityTour.size() - 1); // Random index to choose 2 parents.
     for(int i = 0; i < r; i++)
         child->addCity(potentialParents[parent1].getCityFromTour(i)); // Copy cities from parent 1 up to index r.
-//    for(int i = r; i < potentialParents[parent2].cityTour.size(); i++)
-//        child[i].cityTour[i] = potentialParents[parent2].cityTour[i]; // Copy cities from parent 2 up to index end.
-//    this->addChild(child);
+    for(int i = r; i < potentialParents[parent2].cityTour.size(); i++)
+        child->addCity(potentialParents[parent2].getCityFromTour(i)); // Copy cities from parent 2 up to index end.
+    this->addChild(child);
 }
-
-//
-//    // Block creates a child from 2 parents.
-//    tour* child = new tour(); // Create a blank child tour.
-//    int r = rand()%31; // Random index to choose 2 parents.
-//    for(int i = 0; i < r; i++)
-//        child->cityTour[i] = potentialParents[parent1].cityTour[i]; // Copy cities from parent 1 up to index r.
-//    for(int i = r; i < 32; i++)
-//        child[i].cityTour[i] = potentialParents[parent2].cityTour[i]; // Copy cities from parent 2 up to index end.
-//    return child;
-
-//void tourPopulation::repopulate(){
-//    int eliteIndex = 0;
-//    for(int i = 1; i < population.size(); i++){ // Iterate through population to find the elite tour.
-//        if(population[i].determine_fitness() > population[eliteIndex].determine_fitness()){
-//            eliteIndex = i;
-//        }
-//    }
-//    tourPopulation* temp = new tourPopulation(); // Create a new object to seed from the current population.
-//    temp->addTour(&population[eliteIndex]); // Add elite to new population at index 0.
-//    for(int i = 1; i < population.size(); i++){  // Fill the rest of the population with children of the parent pool.
-//        tour* c = crossover(5);
-//        temp->addTour(c);
-//    }
-//    this->population = temp->population; // Make this objects population the new child population.
-//}

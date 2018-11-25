@@ -16,6 +16,7 @@ protected:
     std::string tourName;
     double fitnessRating;
     double distance;
+    int mutation_value;
 public:
     std::vector<city> cityTour;
     tour();
@@ -29,6 +30,7 @@ public:
     double getFitnessRating();
     void mutate();
     void shuffle_cities(int x);
+    bool contains_city(std::string s);
 };
 
 

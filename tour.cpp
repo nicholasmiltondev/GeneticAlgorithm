@@ -4,7 +4,6 @@
 
 #include "tour.hpp"
 tour::tour(){
-
 };
 void tour::addCity(city* c){
     cityTour.push_back(*c);
@@ -16,7 +15,7 @@ double tour::getFitnessRating(){
     return fitnessRating;
 };
 void tour::setTourName(std::string s) {
-    this->tourName = s;
+    tourName = s;
 }
 void tour::printCitiesInTour(){
     std::vector<city>::iterator it = cityTour.begin();
@@ -24,6 +23,15 @@ void tour::printCitiesInTour(){
         std::cout << it->getCityName() << " " << it->getX() << " " << it->getY() << std::endl;
         ++it;
     }
+};
+bool tour::contains_city(std::string s){
+    std::vector<city>::iterator it = cityTour.begin();
+    while(it != cityTour.end()) {
+        if(it->getCityName() == s)
+            return true;
+        ++it;
+    }
+    return false;
 };
 
 std::string tour::getTourName() {
